@@ -4,38 +4,46 @@ import TodoForm from "@/components/TodoForm";
 import TodoSection from "@/components/TodoSection";
 import { useState } from "react";
 
-interface Todo {
-  id: number;
+export interface Todo {
+  id: string;
   text: string;
-  complete: boolean;
+  completed: boolean;
 }
 
 export default function Home() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([
+    {
+      id: "sdaaddsdsd-dsda-dds-sdadd",
+      text: "할일 1",
+      completed: false,
+    },
+  ]);
   const [input, setInput] = useState<string>("");
 
   const addTodo = () => {
     if (input.trim()) {
       const newTodo: Todo = {
-        id: Date.now(),
+        id: Date.now().toString(),
         text: input,
-        complete: false,
+        completed: false,
       };
       setTodos([...todos, newTodo]);
       setInput("");
     }
   };
 
-  const completeTodo = (id: number) => {
+  const completedTodo = (id: string) => {
     setTodos(
-      todos.map((todo) => (todo.id === id ? { ...todo, complete: true } : todo))
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: true } : todo
+      )
     );
   };
 
-  const uncompleteTodo = (id: number) => {
+  const uncompletedTodo = (id: string) => {
     setTodos(
       todos.map((todo) =>
-        todo.id === id ? { ...todo, complete: false } : todo
+        todo.id === id ? { ...todo, completed: false } : todo
       )
     );
   };
@@ -47,8 +55,8 @@ export default function Home() {
         <TodoForm input={input} setInput={setInput} addTodo={addTodo} />
         <TodoSection
           todos={todos}
-          completeTodo={completeTodo}
-          uncompleteTodo={uncompleteTodo}
+          completeTodo={completedTodo}
+          uncompleteTodo={uncompletedTodo}
         />
       </div>
     </div>

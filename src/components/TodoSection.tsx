@@ -1,13 +1,9 @@
-interface Todo {
-  id: number;
-  text: string;
-  complete: boolean;
-}
+import { Todo } from "@/app/page";
 
 interface TodoSectionProps {
   todos: Todo[];
-  completeTodo: (id: number) => void;
-  uncompleteTodo: (id: number) => void;
+  completeTodo: (id: string) => void;
+  uncompleteTodo: (id: string) => void;
 }
 
 export default function TodoSection({
@@ -17,14 +13,14 @@ export default function TodoSection({
 }: TodoSectionProps) {
   return (
     <>
-      <h2 className="text-2xl font-semibold mb-2">Todos</h2>
-      <ul className="mb-4">
+      <h2 className="text-2xl font-semibold my-3">Todos</h2>
+      <ul className="flex flex-col gap-[8px]">
         {todos
-          .filter((todo) => !todo.complete)
+          .filter((todo) => !todo.completed)
           .map((todo) => (
             <li
               key={todo.id}
-              className="flex justify-between items-center p-2 border-b border-gray-300"
+              className="flex justify-between items-center p-4 bg-white rounded-2xl shadow-md mb-2"
             >
               {todo.text}
               <button
@@ -36,14 +32,14 @@ export default function TodoSection({
             </li>
           ))}
       </ul>
-      <h2 className="text-2xl font-semibold mb-2">Completed</h2>
-      <ul>
+      <h2 className="text-2xl font-semibold my-3">Completed</h2>
+      <ul className="flex flex-col gap-[8px]">
         {todos
-          .filter((todo) => todo.complete)
+          .filter((todo) => todo.completed)
           .map((todo) => (
             <li
               key={todo.id}
-              className="flex justify-between items-center p-2 border-b border-gray-300"
+              className="flex justify-between items-center p-4 bg-white rounded-2xl shadow-md mb-2"
             >
               {todo.text}
               <button

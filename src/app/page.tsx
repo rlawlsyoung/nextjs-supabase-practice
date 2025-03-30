@@ -1,59 +1,22 @@
-"use client";
-
-import { useState } from "react";
-import Navbar from "@/components/Navbar";
-import TodoSection from "@/components/TodoSection";
-import TodoForm from "@/components/TodoForm";
-
-interface Todo {
-  id: number;
-  text: string;
-  complete: boolean;
-}
+import Link from "next/link";
 
 export default function Home() {
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const [input, setInput] = useState<string>("");
-
-  const addTodo = () => {
-    if (input.trim()) {
-      const newTodo: Todo = {
-        id: Date.now(),
-        text: input,
-        complete: false,
-      };
-      setTodos([...todos, newTodo]);
-      setInput("");
-    }
-  };
-
-  const completeTodo = (id: number) => {
-    setTodos(
-      todos.map((todo) => (todo.id === id ? { ...todo, complete: true } : todo))
-    );
-  };
-
-  const uncompleteTodo = (id: number) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, complete: false } : todo
-      )
-    );
-  };
-
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center">
-      <Navbar />
-      <div className="container mx-auto flex flex-col items-center mt-10">
-        <h1 className="text-4xl font-bold mb-4">Todo App</h1>
-        <div className="w-full max-w-md">
-          <TodoForm input={input} setInput={setInput} addTodo={addTodo} />
-          <TodoSection
-            todos={todos}
-            completeTodo={completeTodo}
-            uncompleteTodo={uncompleteTodo}
-          />
-        </div>
+    <div className="min-h-screen flex flex-col items-center justify-center p-4">
+      <h1 className="text-3xl font-bold mb-6">Next.js + Supabase 인증 예제</h1>
+      <div className="flex gap-4">
+        <Link
+          href="/signup"
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          회원가입
+        </Link>
+        <Link
+          href="/login"
+          className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+        >
+          로그인
+        </Link>
       </div>
     </div>
   );

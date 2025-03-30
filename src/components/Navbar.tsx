@@ -4,19 +4,21 @@ export default function Navbar() {
   return (
     <nav className="w-full bg-white shadow-md">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <div className="text-2xl font-bold text-blue-500">Todo App</div>
+        <Link className="text-2xl font-bold text-blue-500" href={"/"}>
+          <h1>Todo App</h1>
+        </Link>
         <div className="space-x-4">
           <Link
-            href="/"
-            className="text-gray-600 hover:text-blue-500 transition-colors"
+            href="/signup"
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
           >
-            Home
+            회원가입
           </Link>
           <Link
-            href="/dashboard"
-            className="text-gray-600 hover:text-blue-500 transition-colors"
+            href="/login"
+            className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
           >
-            Dashboard
+            로그인
           </Link>
         </div>
       </div>
